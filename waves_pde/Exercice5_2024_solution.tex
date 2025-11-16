@@ -1,0 +1,669 @@
+% -*0atex-*-
+%\nonstopmode
+\documentclass[11pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[francais]{babel}
+\usepackage[colorlinks,bookmarks=false,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+
+\setlength{\textheight}{240mm}
+\setlength{\topmargin}{-1.0cm}
+%\setlength{\footskip}{5mm}
+\setlength{\textwidth}{16.6cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+
+\pagestyle{plain}
+%
+\newcommand{\mail}[1]{{\href{mailto:#1}{#1}}}
+\newcommand{\ftplink}[1]{{\href{ftp://#1}{ftp://#1}}}
+\newcommand{\httplink}[1]{{\href{http://#1}{#1}}}
+%
+\def \be {\begin{equation}}
+\def \ee {\end{equation}}
+\def \dd   {{\rm d}}
+\def \fvecrm {{\rm  \bf f}}
+\def \yvecrm {{\rm  \bf y}}
+%
+\def \Avec {\vec{A}}%{{\rm  \bf A}}
+\def \Bvec {\vec{B}}%{{\rm  \bf B}}
+\def \Dvec {\vec{D}}%{{\rm  \bf D}}
+\def \Evec {\vec{E}}%{{\rm  \bf E}}
+\def \Fvec {\vec{F}}
+\def \Hvec {\vec{H}}
+\def \Lvec {\vec{L}}
+\def \Mcalvec { {\cal\vec{M}} }
+\def \Mvec {\vec{M}}
+\def \Nvec {\vec{N}}
+\def \Polvec { {\cal\vec{P}} }
+\def \Svec {\vec{S}}%{{\rm  \bf T}}
+\def \Tvec {\vec{T}}%{{\rm  \bf T}}
+\def \avec {\vec{a}}%{{\rm  \bf a}}
+\def \dvec {\vec{d}}%{{\rm  \bf d}}
+\def \dlvec {\vec{dl}}
+\def \dsigvec {\vec{d\sigma}}
+\def \evec {\vec{e}}%{{\rm  \bf a}}
+\def \gvec {\vec{g}}%{{\rm  \bf a}}
+\def \jvec {\vec{j}}%{{\rm  \bf j}}
+\def \kvec {\vec{k}}%{{\rm  \bf k}}
+\def \mvec {\vec{m}}%{{\rm  \bf m}}
+\def \muvec {\vec{\mu}}%{{\rm  \bf \mu}}
+\def \nvec {\vec{n}}%{{\rm  \bf n}}
+\def \omvec {\vec{\omega}}
+\def \pvec {\vec{p}}%{{\rm  \bf p}}
+\def \rvec {\vec{r}}%{{\rm  \bf r}}
+\def \Rvec {\vec{R}}%{{\rm  \bf R}}
+\def \uvec {\vec{u}}%{{\rm  \bf u}}
+\def \vvec {\vec{v}}%{{\rm  \bf v}}
+\def \xvec {\vec{x}}%{{\rm  \bf x}}
+\def \Xvec {\vec{X}}%{{\rm  \bf X}}
+\def \Avecrm {{\rm  \bf A}}
+\def \Bvecrm {{\rm  \bf B}}
+\def \bvecrm {{\rm  \bf b}}
+\def \Cvecrm {{\rm  \bf C}}
+\def \Dvecrm {{\rm  \bf D}}
+\def \evecrm {{\rm  \bf e}}
+\def \fvecrm {{\rm  \bf f}}
+\def \Fvecrm {{\rm  \bf F}}
+\def \Gvecrm {{\rm  \bf G}}
+\def \Ivecrm {{\rm  \bf I}}
+\def \Jvecrm {{\rm  \bf J}}
+\def \kvecrm {{\rm  \bf k}}
+\def \Lvecrm {{\rm  \bf L}}
+\def \Mvecrm {{\rm  \bf M}}
+\def \pvecrm {{\rm  \bf p}}
+\def \qvecrm {{\rm  \bf q}}
+\def \Rvecrm {{\rm  \bf R}}
+\def \yvecrm {{\rm  \bf y}}
+\def \zvecrm {{\rm  \bf z}}
+\def \0vecrm {{\rm  \bf 0}}
+\def \rhovec {\vec{\rho}}%{ \mbox{\boldmath $\rho$} }
+\def \er {\vec{e_r}}%{{\bf{e_r}}}
+\def \epar {\vec{e_{\parallel}}}%{{\bf{e_{\parallel}}}}
+\def \eper {\vec{e_{\perp}}}%{{\bf{e_{\parallel}}}}
+\def \ephi {\vec{e_{\varphi}}}%{{\bf{e_{\varphi}}}}
+\def \ez {\vec{e_z}}%{{\bf{e_z}}}
+\def \d    {\partial}
+\def \dd   {{\rm d}}
+\def \dt {\Delta t}
+\def \dx {\Delta x}
+\def \dy {\Delta y}
+\def \dz {\Delta z}
+\def \epso {\varepsilon_0}
+\def \epsr {\varepsilon_r}
+\def \kpar {k_{\parallel}}
+\def \kparint {k_{\parallel,int}}
+\def \kparm {k_{\parallel,m}}
+\def \kperp {k_{\perp}}
+\def \vpar {v_{\parallel}}
+\def \vper {v_{\perp}}
+\def \vpervec {\vec{v}_\perp}
+\def \be {\begin{equation}}
+\def \ee {\end{equation}}
+%\def \be {$$}
+%\def \ee {$$}
+\def \ba {\begin{array}{l}}
+\def \ea {\end{array}}
+\def \om {\omega}
+\def \omci {\omega_{ci}}
+\def \rol {\rho_{Li}}
+%
+%
+\def \oints{O\hspace{-5mm}\int\hspace{-3.7mm}\int}
+\def \soints{ o \hspace{-3.2mm}\int\hspace{-2.36mm}\int}
+\def \ints {\int\hspace{-3mm}\int}
+\def \sints {\int\hspace{-2.36mm}\int}
+\def \intv {\int\hspace{-3mm}\int\hspace{-3mm}\int}
+\def \sintv {\int\hspace{-2.36mm}\int\hspace{-2.36mm}\int}
+
+
+% Eigene Enumerate Umgebungen
+\newenvironment{enumerate1}{\begin{list} {(\arabic{enumi})}%
+{\usecounter{enumi}%
+\setlength{\topsep}{0mm}%
+\setlength{\partopsep}{0mm}%
+\setlength{\itemsep}{0mm}%
+\setlength{\labelsep}{2mm}%
+\setlength{\labelwidth}{4mm}%
+\setlength{\leftmargin}{2mm}%
+\addtolength{\leftmargin}{\labelwidth}%
+\addtolength{\leftmargin}{\labelsep}%
+\setlength{\itemindent}{0mm}%
+}}{\end{list}}
+
+\newenvironment{enumeratei}{\begin{list} {(\roman{enumi})}%
+{\usecounter{enumi}%
+\setlength{\topsep}{0mm}%
+\setlength{\partopsep}{0mm}%
+\setlength{\itemsep}{0mm}%
+\setlength{\labelsep}{2mm}%
+\settowidth{\labelwidth}{(viii)}%
+\setlength{\leftmargin}{1mm}%
+\addtolength{\leftmargin}{\labelwidth}%
+\addtolength{\leftmargin}{\labelsep}%
+\setlength{\itemindent}{0mm}%
+}}{\end{list}}
+
+\newenvironment{enumeratea}{\begin{list}{(\alph{enumi})}%
+{\usecounter{enumi}%
+\setlength{\topsep}{0mm}%
+\setlength{\partopsep}{0mm}%
+\setlength{\itemsep}{0mm}%
+\setlength{\labelsep}{2mm}%
+\setlength{\labelwidth}{5mm}%
+\setlength{\leftmargin}{0mm}%
+\addtolength{\leftmargin}{\labelwidth}%
+\addtolength{\leftmargin}{\labelsep}%
+\setlength{\itemindent}{0mm}%
+}}{\end{list}}
+
+\begin{document}
+\sloppy
+\noindent\textsc{École Polytechnique Fédérale de Lausanne}\hfill 1 mai 2024\\
+{Semestre de printemps 2024\\
+Prof.~Laurent Villard\\
+Dr Giovanni Di Giannatale}
+\vspace{5mm}
+\begin{center}
+{\Large\textbf{Physique Numérique -- Exercice 5 -- Solution}}\\
+\vspace{5mm}
+{\small à rendre jusqu'au {\color{red} mardi 14 mai 2024} sur le site
+\href{https://moodle.epfl.ch/mod/assign/view.php?id=1174656}{https://moodle.epfl.ch/mod/assign/view.php?id=1174656}
+}
+\end{center}
+
+\setcounter{section}{4}
+\vspace{-2mm}
+\begin{figure}[h] \center
+%\includegraphics[height=5cm]{WaveReef}
+%\caption{ Déferlement de la vague de Belharra-Perdun le 16 février 2011. (source : \httplink{surf-prevention.com})}
+\end{figure}
+\vspace{-5mm}
+\section{Équation d'onde dans un milieu inhomogène: propagation d'une vague dans un oc\'ean de profondeur non uniforme}
+
+{\bf Introduction}
+
+Dans ce travail, nous allons \'etudier la propagation des vagues en eaux peu profondes, donn\'ees par 
+ l'\'equation:
+\begin{equation} \label{eq:B}
+%\begin{split}
+%\text{Équation A : } \frac{\partial^2f}{\partial t^2} & =u^2\frac{\partial^2f}{\partial x^2}  \\
+%\text{Équation B : } 
+\frac{\d^2f}{\d t^2}  =\frac{\d}{\d x}\left(gh_0\frac{\d f}{\d x}\right) 
+%\text{Équation C : } \frac{\partial^2f}{\partial t^2} & =\frac{\partial^2}{\partial x^2}\left(u^2f\right) 
+%\end{split}
+\end{equation}
+avec $g=9.81\mathrm{m^2/s}$ l'acc\'el\'eration de la pesanteur. Le sch\'ema utilis\'e est celui des diff\'erences finies, explicite, \`a trois niveaux. 
+On consid\`erera, dans un premier temps, une profondeur $h_0$ constante, afin de pouvoir comparer la solution num\'erique avec la solution analytique. Les propri\'et\'es de stabilit\'e et convergence num\'eriques seront test\'es. Dans un deuxi\`eme temps, on prendra une profondeur $h_0(x)$ non uniforme. Il n'y a pas de solution exacte pour ce probl\`eme, mais nous comparerons avec une solution analytique approxim\'ee WKB.
+%
+%Le domaine est tel que $x\in[x_L,x_R]$. Diverses conditions aux bords seront considérées. 
+%L'état initial du système est non perturbé : $f(x,t=0)=0~\forall x$.
+
+%{\em Indication: dans le sch\'ema num\'erique, on consid\`erera une fonction $u^2(x)$ et non pas une fonction $u(x)$ (par exemple, il ne faut pas d\'evelopper $du^2(x)/dx$ en $2u(x)du(x)/dx$.)}
+
+\subsection{Calculs analytiques [10pts]}
+On consid\`ere le cas d'une profondeur $h_0$ constante.
+\begin{enumeratea}
+\item {\bf Solution g\'en\'erale. Vitesse de propagation. [2pts]}\\
+Dans le cas $h_0$ constante, l'\'equation devient 
+\be
+\frac{\d^2f}{\d t^2}  =gh_0 \frac{\d^2f}{\d x^2}
+\ee
+C'est une \'equation type d'Alembert, o\`u on pose
+\be
+u^2=g h_0
+\ee
+La solution g\'en\'erale est
+\be
+f(x,t)=F(x-|u|t) + G(x+|u|t)\;.
+\ee
+ La vitesse de propagation est $\pm u =\pm \sqrt{gh_0}$. Le premier terme repr\'esente une onde progressive (vitesse $+u$), le deuxi\`eme une onde r\'etrograde (vitesse $-u$).
+\item {\bf Modes propres, fr\'equences propres. [3pts]}\\ %--------
+Avec l'Ansatz
+\be
+f(x,t)=Ce^{i(kx-\omega t)}\;,
+\ee
+ins\'erant dans l'Eq.(1), on obtient:
+\be
+\omega^2=k^2u^2 \Rightarrow  k=\pm\frac{\omega}{u} \Rightarrow f(x,t)=e^{-i\omega t} \left(A e^{ikx}+B e^{-ikx}\right)
+\ee
+Avec la condition au bord gauche, on a
+\be
+f(0,t)=0,\forall t \Rightarrow A+B=0 \Rightarrow f(x,t)=\hat{A} e^{-i \omega t} \sin(kx)
+\ee
+Avec la condition au bord droite, on a
+\be
+\d f/\d x (L,0)=0,\forall t \Rightarrow \cos(kx)=0 \Rightarrow k_n=\frac{(n+1/2)\pi}{L} 
+\ee
+Les modes et fr\'equences propres sont donc
+\be \label{eq:eigenmode}
+f_n(x)= sin\left(\frac{(n+1/2)\pi}{L}\right)\;, \;\;\; \omega_n=\frac{(n+1/2)\pi u}{L}
+\ee
+
+\item {\bf Analyse WKB. [5pts]} \\
+Soit  l'\'equation:
+\be \label{eq:A}
+\frac{\d^2f(x,t)}{\d t^2}  = gh_0(x)  \frac{\d^2 f(x,t)}{\d x^2}
+\ee
+En s'inspirant de la d\'erivation faite dans les Notes de Cours, Section 4.2.4, nous avons
+\be
+f(x,t)=\hat{f}(x)e^{-i\omega t}
+\ee
+Introduisant dans l'Eq.(\ref{eq:A}), en posant $u(x)=\sqrt{gh_0(x)}$:
+\be \label{eq:A2}
+-\omega^2\hat{f}(x)=u^2(x)\frac{\dd^2\hat{f}}{\dd x^2}(x)
+\ee
+On note $.\prime=\dd/\dd x$. 
+La solution WKB est de la forme:
+\be
+\hat{f}(x)=A(x)e^{iS(x)}
+\ee
+avec $A(x)$ "lentement variable", $S(x)$ "rapidement variable". En termes d'ordering, chaque fois qu'une fonction est d\'eriv\'ee par rapport \`a $x$, elle prend un ordre de plus. On a:
+\be \label{eq:ordering}
+S\sim\epsilon^{-1}, S'\sim\epsilon^0, S''\sim\epsilon^1;\; A\sim\epsilon^0, A'\sim\epsilon^1, A''\sim\epsilon^2;\;u^2\sim\epsilon^0, (u^2)'\sim\epsilon^1, (u^2)''\sim\epsilon^2
+\ee
+On a
+\be
+\hat{f}'=(A'+iAS')e^{iS}
+\ee
+\be
+\hat{f}''=(A''+2iA'S'+iAS'' -A(S')^2)e^{iS}
+\ee
+Introduisant dans l'Eq.(\ref{eq:A}) et simplifiant par $e^{iS}$, 
+\be
+-\omega^2A=u^2\left(A''+2iA'S'+iAS'' -A(S')^2\right)
+\ee
+En s\'eparant les termes selon l'ordering donn\'e par l'Eq.(\ref{eq:ordering}), on a
+\begin{eqnarray}
+\mathrm{Ordre}\;\; \epsilon^0&:& -\omega^2A=-u^2A(S')^2\\
+\mathrm{Ordre} \;\;\epsilon^1&:& 0 = iu^2(2A'S'+AS'')\\
+\mathrm{Ordre} \;\;\epsilon^2&:& 0 = u^2A''
+\end{eqnarray}
+La solution \`a l'ordre $\epsilon^0$ est
+\be
+\omega^2=u^2(S')^2, \;\Rightarrow S'=\frac{\omega}{u},\;\Rightarrow S''=-\frac{\omega u'}{u^2}
+\ee
+On injecte cette solution dans l'\'equation \`a l'ordre $\epsilon^1$:
+\be
+2A'\frac{\omega}{u} -A\frac{\omega u'}{u^2}=0
+\ee
+Multipliant par $u/A$, on a
+\be
+2\frac{A'}{A}-\frac{u'}{u}=0 \Leftrightarrow 2(\ln A)' -(\ln u)'=0
+\ee
+et donc
+\be
+A=A_0 u^{1/2}
+\ee
+En se rappelant que $u(x)=\sqrt{gh_0(x)}$, on a 
+\be\label{WKBA}
+\boxed{
+A(x)= A_0 (h_0(x))^{1/4}
+}
+\ee
+
+\end{enumeratea}
+
+\subsection{Implémentation en C++ [5pts]}
+Télécharger
+le fichier \href{https://moodle.epfl.ch/mod/resource/view.php?id=XXXX}{Exercice5\_2024\_student.zip} du site Moodle.  
+\begin{enumeratea}
+\item{
+Le schéma explicite à 3 niveaux, section 4.2.1, Eq.(4.43) des Notes de Cours, doit \^etre modifi\'e pour inclure un terme suppl\'ementaire, $g(\dd h_0/\dd x)(\d f/ \d x)$. On note $f_{i,n}=f(x_i,t_n)$. 
+En utilisant les différences finies centrées aux points de maillage:
+\be
+\frac{\dd h_0}{\dd x}(x_i)\approx\frac{h_0(x_{i+1})-h_0(x_{i-1})}{2\Delta x}, \;
+\frac{\d f}{\d x}(x_i,t_n)\approx\frac{f(x_{i+1,n})-f(x_{i-1,n})}{2\Delta x},
+\ee
+il vient, en posant
+\be
+\beta^2_i=\beta^2(x_i)=u^2(x_i)\frac{\Delta t ^2}{\Delta x ^2}\;,
+\ee
+\be \label{eq:schemaB}
+f_{i,n+1}=2\left(1-\beta^2_i\right)f_{i,n}-f_{i,n-1}+\beta^2_i\left(f_{i+1,n}+f_{i-1,n}\right) 
+   + \frac{1}{4}\left(\beta^2_{i+1}-\beta^2_{i-1}\right)\left(f_{i+1,n}-f_{i-1,n}\right)
+\ee
+}
+\item{
+On impl\'emente les conditions aux bords comme expliqu\'e dans les Notes de Cours. Pour la sortie au bord gauche, on suit une d\'emarche similaire \`a celle expos\'ee pour le bord droite, Eqs.(4.44)-(4.46). 
+La solution doit \^etre une onde purement r\'etrograde au voisinage de $x=x_L$, donc $\sim G(\xi)$ avec $\xi(x,t)=x+|u|t$. En d\'erivant $f$ par rapport \`a $t$ en $x=x_L$, on a
+\be
+\frac{\d f}{\d t}(x_L, t) = \frac{\dd G}{\dd\xi}\frac{\d\xi}{\d t}= |u| \frac{\dd G}{\dd\xi}
+\ee
+En d\'erivant $f$ par rapport \`a $x$ en $x=x_L$, on a
+\be
+\frac{\d f}{\d x}(x_L, t) = \frac{\dd G}{\dd\xi}\frac{\d\xi}{\d x}= \frac{\dd G}{\dd\xi}
+\ee
+En comparant ces deux derni\`eres expressions, on a donc:
+\be
+\frac{\d f}{\d t}(x_L, t) =|u| \frac{\d f}{\d x}(x_L, t)
+\ee
+Nous exprimons cette \'equation au premier point de maillage spatial et pour tous les points de maillage temporels, $x=x_0, t=t_n$, en  utilisant les diff\'erences finies "forward" en $x$ et en $t$:
+\be
+\frac{f_{0,n+1}-f_{0,n}}{\Delta t}=|u|\frac{f_{1,n}-f_{0,n}}{\Delta x}
+\ee
+et ainsi:
+\be
+f_{0,n+1}=f_{0,n}+|\beta_1|\left(f_{1,n}-f_{0,n}\right)\;.
+\ee
+}
+\item
+Impl\'ementer 2 choix possibles pour la forme initiale de la vague, $f(x,0)=f_\mathrm{init}(x)$:
+\begin{itemize}
+\item (1) donn\'ee par
+\be \label{eq:finit}
+f_\mathrm{init}(x)=\frac{A}{2}\left(1-\cos\left(2\pi\frac{x-x_1}{x_b-x_2}\right)\right)
+\ee
+\item (2) donn\'ee par un mode propre tel que calcul\'e dans la partie analytique (5.1(b)). On donnera en input le num\'ero $n$ de ce mode propre.
+\end{itemize} 
+\item
+Impl\'ementer 3 choix possibles pour la direction de propagation initiale de la vague: (1) progressive (vers les $x$ croissants); (2) r\'etrograde (vers les $x$ d\'ecroissants); (3) syst\`eme initialement au repos.
+
+On applique les Notes de Cours, Eqs (4.49), (4.50). 
+%\item{On programmera aussi le calcul de  la quantit\'e $E(t)$, définie par 
+%\begin{equation} \label{eq:E}
+%E(t)=\int_{x_L}^{x_R} f^2(x,t)dx.
+%\end{equation}
+%}
+\end{enumeratea}
+
+\subsection{Vitesse de propagation constante [12pts]}
+On considère le cas d'un bassin de 10m de long $(x_L=0, x_r=L=10)$, de profondeur $h_0=3$m constante. La condition au bord gauche est fixe. La condition au bord droite est libre.
+\begin{enumeratea}
+\item 
+{\bf Direction de propagation et r\'eflexions [4pts]:}\\
+On prend une forme de vague initiale donn\'ee par l'Eq.(\ref{eq:finit}), avec $A=1$m, $x_1=2$m, $x_2=6$m. Choisir les conditions initiales pour que la vague parte (1) vers la gauche, (2) vers la droite, (3) vague initialement au repos. Simuler jusqu'\`a un temps $t_\mathrm{fin}$ pour que l'onde ait le temps de faire 2 aller-retours. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.48\linewidth]{FIGURES/5.3a_progressive}
+\includegraphics[width=0.48\linewidth]{FIGURES/5.3a_retrograde}\\
+\includegraphics[width=0.48\linewidth]{FIGURES/5.3a_stat}
+\caption{ \label{fig:5.3a}
+Contours de la hauteur de la perturbation dans l'espace (axe horizontal) - temps (axe vertical), pour une initialisation avec propagation initiale vers la droite droite (en haut \`a gauche), vers la gauche (en haut \`a droite), et une perturbation initiale au repos (en bas).
+}
+\end{center}
+\end{figure}
+
+La vitesse de proppagation est $u=\sqrt{gh_0}=5.4249$m/s. Le temps pour faire 2 aller-retours est donc $t_\mathrm{fin}=7.3734$s. On montre \`a la Fig.\ref{fig:5.3a} les graphes dans l'espace-temps de la perturbation, $f(x,t)$, pour les trois initialisations. On a pris $n_x=64$ et un temps $\Delta t$ tel que $\beta_\mathrm{CFL}=1$. La solution ob\'eit bien au comportement d\'esir\'e, avec une propagation initiale dans la direction voulue. Dans le cas d'un syst\`eme initialement au repos, la perturbation se scinde en deux moiti\'es, l'une se propageant vers la gauche, et l'autre vers la droite.
+
+Il est int\'eressant d'examiner le comportement aux voisinages des extr\'emit\'es du domaine. Pour une condition au bord fixe, le signe de la perturbation r\'efl\'echie s'inverse par rapport \`a celui de la perturbation incidente. Au moment de la r\'eflexion, la perturbation est nulle partout. Pour une condition au bord libre, la perturbation r\'efl\'echie a le m\^eme signe que la perturbation incidente, produisant ainsi, au moment de la r\'eflexion, une amplitude de $2$. 
+
+On illustre \'egalement, dans le cas du syst\`eme initialement au repos, le principe de superposition lin\'eaire: apr\`es r\'eflexions respectivement aux bords gauche et droite, les deux vagues se croisent en s'ignorant mutuellement: elles reprennent leur forme initiale apr\`es croisement. 
+
+\item 
+{\bf Limite de stabilit\'e: [4pts]}\\
+Prendre un des cas de la partie pr\'ec\'edente, avec un nombre d'intervalles $n_x$ donn\'e. V\'erifier et illustrer que la solution devient instable d\`es que  $|\beta_\mathrm{CFL}| > 1$.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3b_f_x_t=1.99}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3b_f_x_tfin}\\
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3b_f_of_t_lin}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3b_f_of_t_log}\\
+\includegraphics[width=0.6\linewidth]{FIGURES/5.3b_f_x_t}
+\caption{ \label{fig:5.3b}
+Cas avec $\beta_\mathrm{CFL}=1.001$, $n_x=64$, condition initiale au repos. Instantan\'es de la vague \`a $t=1.99$s (en haut \`a gauche), $t=7.35$s (en haut \`a droite). Hauteur de la vague enfonction du temps \`a $x=5$m (au milieu) et lignes de niveau dans l'espace-temps (en bas).
+}
+\end{center}
+\end{figure}
+
+On montre \`a la Fig.\ref{fig:5.3b} quelques instantan\'es de la vague $f(x,t_\mathrm{fixe})$, la d\'ependance temporelle de la vague au milieu du domaine, $f(x_\mathrm{fixe},t)$ ,  ainsi que les lignes de niveau dans l'espace-temps, pour $\beta_\mathrm{CFL}=1.001$. On observe des oscillations dans l'espace et le temps \`a la limite de Nyquist (i.e. 2 points de maillage spatial par longueur d'onde et 2 points de maillage spatial par p\'eriode), dont l'amplitude augmente exponentiellement au cours du temps. c'est bien le signe d'une instabilit\'e. Cette instabilit\'e est li\'ee \`a la discr\'etisation, elle est donc bien d'origine num\'erique, et non physique.
+
+
+\item {\bf Modes propres: [4pts]}\\
+On initialise le mode propre $n=3$, avec une amplitude $A=1$, $f(x,t\le 0)=f_n(x)~\forall x$. On simule une p\'eriode th\'eorique d'oscillation $T_n=2\pi/\omega_n$, avec $\omega_n$ la fr\'equence propore, Eq.(\ref{eq:eigenmode}).:
+\be \label{eq:periode}
+T_n=\frac{2L}{\sqrt{gh_0}(n+1/2)}
+\ee
+Les contours de la perturbation, Fig.\ref{fig:5.3c}, \`a gauche, montrent qualitativement qu'apr\`es une p\'eriode, le syst\`eme est revenu dans son \'etat initial. Une analyse plus quantitative de 
+ l'erreur,  $\int_{x_L}^{x_R} |f_{num}(x,t=T) - f_{ana}(x,t=T)| \,dx$, int\'egr\'ee num\'eriquement avec la r\`egle des trap\`ezes, montre que cette erreur n'est pas nulle, mais qu'elle converge vers z\'ero, avec une loi de convergence lin\'eaire en $n_x$, Fig.\ref{fig:5.3c}, \`a droite.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3c_f_x_t}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3c_conv}
+%\includegraphics[width=0.6\linewidth]{FIGURES/5.3b_f_x_t}
+\caption{ \label{fig:5.3c}
+Contours de la perturbation, avec le mode propre $n=3$ initialis\'e \`a $t=0$. On simule une dur\'ee d'une p\'eriode th\'eorique. Convergence de l'erreur en fonction de $n_x$, \`a $\beta_\mathrm{CFL}= 0.9$. La ligne traitill\'ee est de pente $-1$.
+}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+%\includegraphics[width=0.4\linewidth]{FIGURES/5.3c_f_x_t}
+\includegraphics[width=0.4\linewidth]{FIGURES/5.3c_conv_trick}
+\caption{ \label{fig:trick1}
+Convergence de l'erreur en fonction de $n_x$, avec un domaine artificiellement aggrandi d'un demi-point de maillage pour une meilleure pr\'ecision de la condition au bord libre, et avec $\beta_\mathrm{CFL}$ tendant vers 1. 
+}
+\end{center}
+\end{figure}
+
+
+{\color{blue} %-------------------------------------------------------------------------------------------
+Facultatif. En fait, une bonne partie de l'erreur est due \`a l'utilisation de diff\'erences finies non-centr\'ees pour imposer la condition au bord "libre" $\d f /\d x=0$. On obtient une meilleure approximation si on \'etend artificiellement le domaine de calcul de telle sorte que le milieu du dernier intervalle soit en $x=x_R$, o\`u $x_R$ est la "vraie"  position du bord droit dans le monde r\'eel. On choisit ainsi un bord droit num\'erique $\tilde{x_R}$ tel que
+\be
+\tilde{x_R}-x_R = \frac{1}{2} \frac{\tilde{x_R}-x_L}{n_x}\;.
+\ee
+On obtient 
+\be
+\tilde{x_R}=\frac{x_R-x_L/(2n_x)}{1-1/(2n_x)}\;.
+\ee
+L'autre propri\'et\'e int\'eressante est que le sch\'ema num\'erique utilis\'e, pour $h_0$=const, est exact si on choisit $\beta_\mathrm{CFL}=1$. Pour un temps final exactement \'egal \`a la p\'eriode analytique, Eq.(\ref{eq:periode}), 
+on a, avec $\Delta t=t_\mathrm{fin}/n_\mathrm{steps}$ et $\Delta x=L/n_x$, 
+\be
+\beta_\mathrm{CFL}=\frac{2n_x}{(n+1/2)n_\mathrm{steps}}
+\ee
+Pour obtenir $\beta_\mathrm{CFL}=1$, la condition est
+\be
+n_\mathrm{steps}=\frac{4n_x}{2n+1}
+\ee
+Il faut donc, puisque $n_\mathrm{steps}$ doit \^etre entier, que $n_x$ soit un multiple de $2n+1$.
+En changeant artificiellement la taille du domaine, cependant, $\beta_\mathrm{CFL}$ ne pourra plus \^etre exactement \'egal \`a 1. 
+
+On montre \`a la Fig.\ref{fig:trick1} la convergence obtenue, pour $n=3$, et $n_x=35, 70, 140, 280, 560, 1120$ (et donc $n_\mathrm{steps}=20,40,80,160,320,640$). On obtient une "super-convergence" d'ordre 4. Un partie est d\^ue au fait qu'au fur et \`a mesure que $n_x$ augmente,  $\beta_\mathrm{CFL}$ s'approche de 1: $\beta_\mathrm{CFL}=0.9857,0.992857,0.99642857,0.9982142857, 0.999107142857,0.99955357142857$.
+}
+
+
+
+
+\end{enumeratea}
+
+\subsection{Vague sur un r\'ecif de corail [18pts]}
+On représente la profondeur de l'oc\'ean par le profil suivant:
+\begin{equation}
+h_0(x)=
+\begin{cases}
+h_L&(x_L\le x \le x_a),\\
+\frac{1}{2}(h_L+h_C) + \frac{1}{2}(h_L-h_C)\cos\left(\pi \frac{x-x_a}{x_b-x_a}\right)&(x_a< x < x_b)\\
+h_C&(x_b\le x_c) \\
+\frac{1}{2}(h_R+h_C) - \frac{1}{2}(h_R-h_C)\cos\left(\pi \frac{x-x_c}{x_d-x_c}\right)&(x_c< x < x_d)\\
+h_R&(x_d \le x \le x_R)
+\end{cases}
+\end{equation}
+
+
+On prend $h_L=7000$m, $h_C=35$m, $h_R=200$m, $x_L=0$, $x_a=300$km, $x_b=700$km, $x_c=720$km, $x_d=850$km, $x_R=1000$km.
+
+
+
+
+
+%\emph{N.B.: Pour ces param\`etres, les hypoth\`eses conduisant aux \'equations en eaux peu profondes ne sont pas forc\'ement v\'erifi\'ees dans la r\'ealit\'e. Le cas des vagues en g\'en\'eral est trop complexe pour \^etre trait\'e dans le cadre de ce cours.}
+
+\emph{{\bf Indications:} Attention de prendre une résolution spatiale suffisante. D'autre part, pour éviter d'obtenir des fichiers de sortie trop volumineux, on peut n'écrire $f(x,t)$ que tous les $n_\mathrm{stride}$ pas de temps. Simuler un temps $t_\mathrm{fin}$ de l'ordre de 3 heures, soit environ $10000$s. Choisir $\Delta t$ de telle sorte que $\max(\beta_\mathrm{CFL})=1$.
+}
+
+\emph{Pour calculer la vitesse de propagation et l'amplitude, on peut par exemple chercher, pour chaque temps $t_j$, la position du maximum de $f$.  Attention, il faut faire une interpolation quadratique en $x$ de $f(x, t_j)$, \`a $t=t_j$ fix\'e , au voisinage du  maximum sur la grille spatiale, pour \'eviter des sauts brusques. 
+On obtient ainsi un ensemble de valeurs $x_{crete,j},$.  On \'evalue la vitesse de propagation par diff\'erences finies centr\'ees $v=(x_{crete,i+k}-x_{crete,i-k})/(t_{i+k}-t_{i-k})$, avec $k\ge1$ un nombre entier, choisi pour minimiser les oscillations de $v$. 
+}
+\begin{enumeratea}
+\item {\bf Illuster la solution obtenue. [2pts]}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.92\linewidth]{FIGURES/5.4a_z_of_x}
+\caption{\label{fig:5.4a_z_of_x} Profil de l'altitude du fond de l'oc\'ean}
+\end{center}
+\end{figure}
+
+ Le profil du fond de l'oc\'ean correspondant est montr\'e \`a la Fig.\ref{fig:5.4a_z_of_x}. 
+On simule l'évolution d'une vague se propageant de gauche \`a droite, dont la forme initiale est donn\'ee par l'Eq.(\ref{eq:finit}) avec $A=1$m, $x_1=50$km, $x_2=250$km, avec des conditions aux bords droite et gauche  ``sortie de l'onde". 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.99\linewidth]{FIGURES/5.4a_f_x_t_4096}
+\caption{\label{fig:5.4a_f_x_t} Contours dans l'espace-temps de la hauteur de la vague. }
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.65\linewidth]{FIGURES/5.4a_f_x_tfin}
+\caption{\label{fig:5.4a_f_x_tfin} Solution au temps $t_\mathrm{fin}=12000$s, pour des r\'esolutions spatiales $n_x=1024, 2048, 4096$. Les valeurs de $\Delta t$ sont elles que $\beta_\mathrm{CFL,max}=1$.  }
+\end{center}
+\end{figure}
+
+Pour estimer la r\'esolution spatiale n\'ecessaire, on peut estimer la longueur d'onde de la vague \`a son point o\`u elle est la plus courte, c'est-\`a-dire sur le r\'ecif. La vitesse de propagation est $u(x)=\sqrt{gh_0(x)}$, et la longueur d'onde est ainsi $\lambda(x)=\sqrt{gh_0(x)}T$, avec $T$ la p\'eriode. Ainsi, $\lambda$ est  proportionnelle \`a $\sqrt{h_0(x)}$. La vague a initialement une longueur d'onde $\lambda_L=x_2-x_1=200$km, \`a une profondeur $h_L=7000$m. 
+La longueur d'onde sur le r\'ecif sera donc $\lambda_C=\lambda_L\sqrt{h_C/h_L} = \sqrt{2}\cdot 10^4$m. Ceci correspnd \`a environ 1/70 de la taille du domaine. Le strict minimum (Nyquist, i.e. 2 points de maillage par longueur d'onde) serait d'au moins 140 points de maillage. Il faut en fait de l'ordre de 10 fois plus. Nous allons donc faire des simulations avec $n_x=1024, 2048, 4096$. On prend \`a chaque fois $\Delta t$ correspondant \`a la conditoin $\beta_\mathrm{CFL, max}=\sqrt{gh_L} \Delta t/\Delta x = 1$. C'est en effet au dessus de l'oc\'ean profond que la vitesse de propagation $u$ est maximale, et donc que $\beta_\mathrm{CFL}$ est maximal.
+
+La Fig.\ref{fig:5.4a_f_x_t} montre les contours de la hauteur de la vague dans l'espace-temps. On constate un ralentissement  de la propagation et une augmentation de l'amplitude lorsque la vague arrive sur le r\'ecif. Le ph\'enom\`ene inverse se produit lorsque la vague ressort. 
+
+On constate aussi qu'il y a une r\'eflexion partielle de la vague: ceci n'est pas pr\'edit par la th\'eorie WKB. 
+
+On montre la solution au temps $t_\mathrm{fin}=12000$s, pour les 3 r\'esolutions spatiales consid\'er\'ees, \`a la Fig.\ref{fig:5.4a_f_x_tfin}. On observe une  vaguelette dans le sillage de l'onde principale. Cette ondelette est probablement due \`a un effet de la discr\'etisation: on constate en effet que son amplitude d\'ecro\^it en prenant des maillages plus fins. On observe aussi, empiriquement, que les solutions pour $n_x=2048$ et pour $n_x=4096$ sont tr\`es proches l'unde de l'autre: le sch\'ema a l'air de converger num\'eriquement (observation qualitative).
+
+\item {\bf Hauteur de la vague [4pts]}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4b_Amplitude_x}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4b_Amplitude_x_zoom}
+\caption{\label{fig:5.4b_Amplitude_x}  Hauteur de la vague (ligne noire) calcul\'ee avec $n_x=4096$, $\beta_\mathrm{CFL,max}=1$ et comparaison avec la solution WKB (ligne rouge) .  A droite, zoom sur la r\'egion du r\'ecif avec 3 valeurs de $nx=1024, 2048, 4096$ (toujours avec $\beta_{CFL}=1$).}
+\end{center}
+\end{figure}
+
+La hauteur de la vague mesur\'ee en fonction de la position est repr\'esent\'ee \`a la Fig.\ref{fig:5.4b_Amplitude_x}, pour les trois r\'esolutions $n_x=1024, 2048, 4096$ (toujours avec $\beta_{CFL}=1$). Un zoom sur la partie au voisinage de la barri\`ere de corail montre que la solution semble, qualitativement au moins, proche de la valeur converg\'ee pour $n_x=4096$. Cependant, la valeur de la hauteur de la vague sur le r\'ecif, $\max(f)\approx 3.58$m, est plus basse que celle pr\'edite par WKB, $\max(f)=(h_L/h_C)^{1/4}=3.7606$m. 
+
+Un explication possible tient au fait que la m\'ethode WKB est une approximation, bas\'ee sur le fait que la longueur d'onde locale varie peu \`a l'\'echelle de la longueur d'onde. Or, la la longueur d'onde initiale est $\lambda_L=x_2-x_1=2\cdot 10^5$m. La profondeur de l'oc\'ean varie de 7000m \`a 35m sur une distance de $x_b-x_a=4\cdot 10^5$m.  Sur cette distance, qui ne vaut que 2 fois la longueur d'onde initiale, la longueur d'onde locale varie de $2\cdot 10^5$ \`a $\lambda_C=\lambda_L\sqrt{h_C/h_L} \approx 1.4\cdot 10^4$m, soit un facteur  $14$, ce qui n'est pas n\'egligeable. Ceci nous indique que l'approximation WKB n'est que marginalement satisfaite.
+
+L'effet de cette variation rapide est de cr\'eer une r\'eflexion partielle de la vague, comme nous l'avons not\'e sur la Fig.\ref{fig:5.4a_f_x_t}. On observe en effet que l'amplitude en $x=0$ n'est pas nulle, elle vaut environ $1.08$m: c'est l'amplitude de la vague r\'efl\'echie.
+ Etant partiellement r\'efl\'echie, la partie transmise de la vague est d'amplitude diminu\'ee, et c'est ce que la simulation num\'erique indique.
+
+\item {\bf Vitesse de propagation de la vague [4pts]}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4c_u_of_x_4096}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4c_u_of_x_4096_zoom}
+\caption{\label{fig:5.4c_u_of_x}  Vitesse de propagation de la cr\^ete de la vague (ligne continue rouge) et comparaison avec la solution WKB (traitill\'e noir). $n_x=4096$, $\beta_\mathrm{CFL,max}=1$.  A droite, zoom sur la r\'egion du r\'ecif avec deux valeurs de $k$ pour les diff\'erences finies.}
+\end{center}
+\end{figure}
+
+Pour calculer la vitesse de propagation, on prend la m\'ethode indiqu\'ee. Pour $n_x=4096$, on montre le r\'esultat \`a la Fig.\ref{fig:5.4c_u_of_x}. Un zoom au voisinage du r\'ecif montre le r\'esultat obtenu avec $k=1$ et $k=20$. Prendre une valeur plus \'elev\'ee de $k$ conduit ainsi \`a r\'eduire les oscillations du r\'esultat. La comparaison avec la solution WKB, en traitill\'es, montre un assez bon accord, mais il y a des d\'eviations, probablement dues aux ph\'enom\`enes de r\'eflexions partielles not\'es pr\'ec\'edemment.
+
+\item {\bf Fonds oc\'eaniques de plus en plus raides [4pts]}. 
+
+On fait cette \'etude en rapprochant le point $x_a$ du point $x_b$ et en comparant la solution num\'erique avec la solution WKB.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{FIGURES/5.4d_xa_650_f_x_t}
+\includegraphics[width=0.95\linewidth]{FIGURES/5.4d_xa_695_f_x_t}
+\caption{\label{fig:5.4d_f_x_t}  Contours de la hauteur de la vague pour $x_a=650$km (en haut) et $x_a=695$km (en bas). Plus le fond de l'oc\'ean est raide, plus il la vague est r\'efl\'echie. $n_x=4096$, $\beta_\mathrm{CFL,max}=1$. }
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{FIGURES/5.4d_xa_var_Amplitude_x}
+%\includegraphics[width=0.95\linewidth]{FIGURES/5.4d_xa_695_f_x_t}
+\caption{\label{fig:5.4d_xa_var_Amplitude_x}  Hauteur de la vague pour diff\'erentes valeurs de $x_a$ et comparaison avec la solution WKB. $n_x=4096$, $\beta_\mathrm{CFL,max}=1$. }
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.5\linewidth]{FIGURES/5.4d_Amplitude_xinv}
+%\includegraphics[width=0.95\linewidth]{FIGURES/5.4d_xa_695_f_x_t}
+\caption{\label{fig:5.4d_Amplitude_xinv}  Hauteur de la vague sur le r\'ecif en fonction de $1/(x_b-x_a)$. La  solution WKB est indiqu\'ee par le cercle. $n_x=4096$, $\beta_\mathrm{CFL,max}=1$. }
+\end{center}
+\end{figure}
+
+On montre \`a la Fig.\ref{fig:5.4d_f_x_t} deux exemples, $x_a=650$km et $x_a=695$km. Avec le rapprochement entre les points $x_a$ et $x_b$, on augmente l'amplitude de l'onde r\'efl\'echie et on diminue l'amplitude de l'onde transmise. 
+
+On illustre ceci de fa\c{c}on plus quantitative \`a la Fig. \ref{fig:5.4d_xa_var_Amplitude_x}. Plus le fond de l'oc\'ean est raide, plus l'onde r\'efl\'echie est importante, et moins la vague arrive a passer par dessus le r\'ecif. On s'\'ecarte donc de plus en plus de la solution WKB, ce qui n'est pas \'etonnant puisque l'approximation sur laquelle cette m\'ethode est bas\'ee est de moins en moins valide.
+
+Pour quantifier comment on tend vers la solution WKB, la Fig.\ref{fig:5.4d_Amplitude_xinv} montre l'amplitude sur le r\'ecif en fonction de l'inverse de la distance entre $x_a$ et $x_b$. On observe bien que la limite WKB est atteinte en extrapolant les r\'esultats pour une distance entre $x_a$ et $x_b$ qui tend vers l'infini, limite pour laquelle les hypoth\`eses de WKB sont v\'erifi\'ees.
+
+N.B.: Toutes les simulations de cette section ont \'et\'e r\'ealis\'ees avec $n_x=4096$. Attention, lorsque l'on rapproche trop $x_a$ de $x_b$, la pente de l'oc\'ean tend vers l'infini, et on a un probl\`eme: l'\'equation devient singuli\`ere. Pour $x_b-x_a$ inf\'erieur \`a 3km, le code explose.
+
+\item {\bf Vague donn\'ee par l'Eq.(\ref{eq:A}) [4pts]}
+
+Supposer maintenant que l'\'equation de la vague est donn\'ee par l'Eq.(\ref{eq:A}). Recalculer la vague obtenue, illuster le r\'esultat. Analyser la hauteur de la vague et la vitesse de propagation. Comparer avec la solution WKB.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{FIGURES/5.4e_f_x_t}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4e_Amplitude_x}
+\includegraphics[width=0.49\linewidth]{FIGURES/5.4e_u_x}
+\caption{\label{fig:5.4e}  Cas de l'Eq.(\ref{eq:A}). Contours de la hauteur de la vague (en haut). Hauteur de la vague en fonction de $x$  (en bas \`a gauche), vitesse de propagation de la vague (en bas \`a droite)  et comparaison avec la solution WKB.
+ $n_x=4096$, $\beta_\mathrm{CFL,max}=1$. }
+\end{center}
+\end{figure}
+
+Pour effectuer les simulations, il suffit de supprimer le dernier terme dans l'Eq.(\ref{eq:schemaB}). Lesr\'esultats sont montr\'es \`a la Fig.\ref{fig:5.4e}. 
+L'amplitude, contrairement au cas physique, d\'ecro\^it lorsque la vague passe sur le r\'ecif, conform\'ement \`a la solution WKB. Elle est un peu plus petite que la pr\'ediction WKB. On constate aussi une r\'eflexion partielle de la vague, avec une amplitude r\'efl\'echie, en $x=0$, d'environ $0.03$m.
+La vitesse de propagation, elle, n'est pas affect\'ee par ce changement.
+
+\subsection {Conclusions}
+
+Nous avons examin\'e en d\'etail les propri\'et\'es num\'eriques de convergence et de stabilit\'e du sch\'ema de diff\'erences finies  explicite \`a 3 niveaux. Les v\'erifications ont port\'e sur le comportement de r\'efl\'exions aux bords du domaine, lorsque les conditions aux bords sont fixes ou libres, ainsi que sur la comparaison avec un des modes propres d syst\`eme. 
+
+Nous avons ensuite appliqu\'e ce sch\'ema \`a l'\'etude d'une vague se propageant dans un oc\'ean de profondeur non uniforme. On a constat\'e le ralentissement de la vitesse de propagation et l'augmentation de l'amplitude de la vague lorsqu'elle est sur des hauts-fonds. La v\'erification a \'et\'e de nature qualitative, puisqu'elle s'est faite en comparant avec la solution analytique WKB, qui n'est pas exacte. Nous avons mis en \'evidence les limites de cette approche WKB lorsque la profondeur de l'oc\'ean varie fortement sur de courtes distances (en d'autres termes lorsque le fond marin est pentu). 
+
+On constate une augmentation de la r\'eflection partielle losrque le fond de l'oc\'ean est de plus en plus raide: cela pourrait-il prot\'eger les c\^otes des effets d\'evastateurs des tsunamis? 
+
+%\item Dans le cas B, étudier ce qui passe pour des bords de la barrière de plus en plus raides, i.e. $x_a$ s'approchant de $x_b$. Comparer avec l'analyse WKB.
+
+\end{enumeratea}
+
+%\subsection{Supplément facultatif}
+%\begin{itemize}
+%%\item Etudier ce qui se passe pour des bas-fonds de plus en plus raides (i.e. en diminuant la valeur de $\sigma_{hf}$). 
+%\item Etudier ce qui se passserait si l'\'equation des vagues \'etait
+%\be
+%\frac{\d^2f}{\d t^2}  =\frac{\d^2}{\d x^2}\left(u^2 f\right) \;.
+%\ee
+%Modifier le code en cons\'equence et faire l'analyse WKB. Simuler et comparer avec la solution WKB.
+%\item Consid\'erer le cas \`a deux dimensions d'espace, $h_0=h_0(x,y)$, avec un maillage en $x$ et en $y$. Choisir diff\'erentes formes pour la profondeur de l'oc\'ean: essayer d'obtenir une focalisation des ondes. 
+%\end{itemize}
+
+
+%\subsection{Rédaction du rapport en \LaTeX}
+%\noindent Rédiger un rapport  de {\bf maximum 15 pages figures comprises} dans lequel les calculs analytiques et les résultats des simulations num\'eriques des questions ci-dessus sont présentés et discut\'es.
+
+%\noindent N.B. On trouve plusieurs documents \LaTeX~(introduction, examples, références) dans un dossier spécifique sur Moodle (\href{http://moodle.epfl.ch/mod/folder/view.php?id=155041}{Dossier \LaTeX}).
+
+%\subsection{Soumission du rapport en format pdf et du fichier source C++}
+%\begin{enumeratea}
+%\item{Préparer le fichier source \LaTeX~du rapport {\color{red}\verb+RapportExercice7_Nom1_Nom2.tex+}}
+%\item{Préparer le fichier du rapport en format \verb+pdf+ {\color{red}\verb+RapportExercice7_Nom1_Nom2.pdf+}}
+%\item{Préparer le fichier source C++ {\color{red} \verb+Exercice7_Nom1_Nom2.cpp+}}
+%\item{Préparer le fichier source Matlab ou Python {\color{red} \verb+Analyse_Nom1_Nom2.m ou .py+}}
+%\item{Déposer les fichiers sur Moodle avec \href{https://moodle.epfl.ch/mod/assign/view.php?id=1174659}{ce lien}.}
+%\end{enumeratea}
+\vspace{5mm}
+En plus des points \'enonc\'es ci-dessus, on attribue \textbf{[5pts]} pour la participation en classe et la qualit\'e g\'en\'erale du rapport. 
+\end{document}
+
+

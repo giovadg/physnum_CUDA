@@ -9,9 +9,11 @@ x2=6.0
 
 tfin=1.053335740208249
 
+
 swap_bool = true
 bc_cuda = true
 usecub = true
+thrust_device = true
 
 equation_type=Eq1
 nx=64
@@ -24,7 +26,7 @@ nsteps=40
 impose_nsteps = true 
 
 output=test.out
-n_stride=1
+n_stride=20
 ecrire_f=1
 
 hL = 7000.0

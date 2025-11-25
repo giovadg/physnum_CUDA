@@ -1,0 +1,16 @@
+tfin = 100.0
+nsteps = 2000
+output = output_new.out
+sampling = 2
+N_part = 1000 // number of particles
+N_bins = 30 // number of bins for reconstructing the distribution function
+v0 = -3.5
+gamma = 0.2
+D = 0.3 
+vhb = 5 // upper velocity boundary for f binning
+vlb = -5 // lower velocity boundary for f binning
+vg_D = -4 // low velocity value for  initial Dirac distribution (or for uniform distribution)
+vd_D = 4 // high velocity value for  initial Dirac distribution (or for uniform distribution)
+sigma0=0.04
+vc = 3 
+initial_distrib = D // D to use as initial distribution the sum of two Dirac distribution

@@ -202,9 +202,11 @@ int main(int argc, char* argv[])
   auto start = std::chrono::high_resolution_clock::now();
   engine.run(); // executer la simulation
   auto end  = std::chrono::high_resolution_clock::now();
-  auto diff = std::chrono::duration<double>(end-start);
+  auto diff = std::chrono::duration<double>(end-start).count();
   printf("The duration of the simulation is %g [s] \n", diff );
 
   cout << "Fin de la simulation." << endl;
   return 0;
 }
+
+

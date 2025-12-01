@@ -1,6 +1,6 @@
 % Physique :
-cb_gauche=fixe   !fixe, libre, sortie
-cb_droite=libre !fixe, libre, sortie
+cb_gauche=fixed   !fixed, free, exit
+cb_droite=free !fixed, free, exit
 v_uniform = true
 
 A=1.0
@@ -16,17 +16,17 @@ usecub = true
 thrust_device = true
 
 equation_type=Eq1
-nx=64
+nx=128
 n_init=3
 initialization =mode
 initial_state=static
 
 CFL=1.0
-nsteps=40
+nsteps=100
 impose_nsteps = true 
 
 output=test.out
-n_stride=20
+n_stride=100
 ecrire_f=1
 
 hL = 7000.0

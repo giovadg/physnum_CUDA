@@ -23,10 +23,10 @@ initial_state=static
 
 CFL=1.0
 nsteps=100
-impose_nsteps = true 
+impose_nsteps = false
 
 output=test.out
-n_stride=100
+n_stride=2
 ecrire_f=1
 
 hL = 7000.0

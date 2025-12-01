@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <string.h>
-#include "ConfigFile.tpp"
+#include "ConfigFile.h"
 #include <algorithm>
 
 using namespace std;
@@ -15,21 +15,21 @@ void boundary_condition(vector<double> &fnext, vector<double> &fnow, double cons
 		double const& t,double const& dt, \
 		vector<double> &beta2, string &bc_l, string &bc_r, int &N)
 {
-      if (bc_l == "fixe"){
+      if (bc_l == "fixed"){
         fnext[0] = 0; // TODO : Completer la condition au bord gauche fixe
-      }else if(bc_l == "libre"){
+      }else if(bc_l == "free"){
         fnext[0] = fnext[1]; // TODO : Completer la condition au bord gauche libre
-      }else if (bc_l =="sortie"){
+      }else if (bc_l =="exit"){
         fnext[0] = fnow[0] + (fnow[1]-fnow[0])*sqrt(beta2[0]); // TODO : Completer la condition au bord gauche "sortie de l'onde"
       }else{
         cerr << "Merci de choisir an condition aux bord valid pour la gauche" << endl;
       }
 	      
-      if (bc_r == "fixe"){
+      if (bc_r == "fixed"){
         fnext[N-1] = 0; // TODO : Completer la condition au bord droit fixe
-      }else if(bc_r == "libre"){
+      }else if(bc_r == "free"){
         fnext[N-1] = fnext[N-2]; // TODO : Completer la condition au bord droit libre
-      }else if (bc_r =="sortie"){
+      }else if (bc_r =="exit"){
         fnext[N-1] = fnow[N-1] + (fnow[N-2] - fnow[N-1]) * sqrt(beta2[N-1]); // TODO : Completer la condition au bord droit "sortie de l'onde"
       }else{
         cerr << "Merci de choisir an condition aux bord valid pour la droit" << endl;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
   double dt;
   double t;
   double Nsteps;
-  int stride(0);
+  int stride(0), N;
 
   string inputPath("configuration.in"); // Fichier d'input par defaut
   if(argc>1) // Fichier d'input specifie par l'utilisateur ("./Exercice7 config_perso.in")
@@ -86,47 +86,42 @@ int main(int argc, char* argv[])
   for(int i(2); i<argc; ++i) // Input complementaires ("./Exercice7 config_perso.in input_scan=[valeur]")
     configFile.process(argv[i]);
 
-  // Parametres de simulation :
-  double tfin    = configFile.get<double>("tfin");
-  int nx          = configFile.get<int>("nx"); // nb intervalles
-  int N = nx+1;                                // nb pts de maillage
-  double CFL     = configFile.get<double>("CFL");
-  double nsteps  = configFile.get<double>("nsteps");
-  double A       = configFile.get<double>("A");
-  double n_init   = configFile.get<double>("n_init");
-  double hL      = configFile.get<double>("hL");
-  double hR      = configFile.get<double>("hR");
-  double hC      = configFile.get<double>("hC");
-  double h00     = configFile.get<double>("h00"); // profondeur, cas uniforme
-  double x1      = configFile.get<double>("x1");
-  double x2      = configFile.get<double>("x2");
-  double xa      = configFile.get<double>("xa");
-  double xb      = configFile.get<double>("xb");
-  double xc      = configFile.get<double>("xc");
-  double xd      = configFile.get<double>("xd");
-  double xL      = configFile.get<double>("xL");
-  double xR      = configFile.get<double>("xR");
-  int n_stride(configFile.get<int>("n_stride"));
+  // Simulation parameters :
+  int nx                    = configFile.get<int>("nx",64); // nb intervalles
+  int n_stride              = configFile.get<int>("n_stride",10);
 
-// Conditions aux bords:
-  string bc_l           = configFile.get<string>("cb_gauche");
-  string bc_r           = configFile.get<string>("cb_droite");
+  double tfin                  = configFile.get<double>("tfin",10);
+  double CFL                   = configFile.get<double>("CFL",1);
+  double nsteps                = configFile.get<double>("nsteps",3);
+  double A                     = configFile.get<double>("A",1);
+  double n_init                = configFile.get<double>("n_init",3);
+  double hL                    = configFile.get<double>("hL",7000);
+  double hR                    = configFile.get<double>("hR",200);
+  double hC                    = configFile.get<double>("hC",35);
+  double h00                   = configFile.get<double>("h00",3);
+  double x1                    = configFile.get<double>("x1",2.0);
+  double x2                    = configFile.get<double>("x2",6.0);
+  double xa                    = configFile.get<double>("xa",3*pow(10,5));
+  double xb                    = configFile.get<double>("xb",7*pow(10,5));
+  double xc                    = configFile.get<double>("xc",7.2*pow(10,5));
+  double xd                    = configFile.get<double>("xd",8.5*pow(10,5));
+  double xL                    = configFile.get<double>("xL",0);
+  double xR                    = configFile.get<double>("xR",10.0);
+  bool impose_nsteps           = configFile.get<bool>("impose_nsteps",false);
+  bool v_uniform               = configFile.get<bool>("v_uniform",true);
+  bool usecub                  = configFile.get<bool>("usecub",true);
+  bool bc_cuda                 = configFile.get<bool>("bc_cuda",true);
+  bool swap_bool               = configFile.get<bool>("swap_bool",true);
+  bool thrust_device           = configFile.get<bool>("thrust_device",true);
+  bool ecrire_f                = configFile.get<bool>("ecrire_f",true);
+  string equation_type         = configFile.get<string>("equation_type","Eq1");
+  string bc_l              = configFile.get<string>("cb_gauche","free");
+  string bc_r              = configFile.get<string>("cb_droite","free");
+  string initialization        = configFile.get<string>("initialization","mode");
+  string initial_state         = configFile.get<string>("initial_state","static");
+  string output                = configFile.get<string>("output","outputout");
 
-// Type de forme initiale de la vague: selon donnée Eq.(4) ou mode propre
-// ('mode' pour mode propre, autrement Eq.(4))
-  string initialization = configFile.get<string>("initialization"); 
-
-// Onde partant vers la gauche ou vers la droite ou statique
-// (par exemple 'left', 'right', 'static')
-  string initial_state = configFile.get<string>("initial_state");
-
-// Selecteur pour le cas h0 uniforme:
-  bool v_uniform        = configFile.get<bool>("v_uniform");
-
-// Selecteur pour choisir le pas de temps:
-// true --> dt=tfin/nsteps; t final est exactement tfin
-// false --> dt tel que beta_CFL=1; attention, t final n'est pas exactement tfin
-  bool impose_nsteps    = configFile.get<bool>("impose_nsteps");
+  N = nx+1;                                // pts of the mesh
 
   vector<double> h0(N) ;
   vector<double> vel2(N) ;
@@ -134,9 +129,6 @@ int main(int argc, char* argv[])
   vector<double> fpast(N), fnow(N), fnext(N), beta2(N);
 
   dx = (xR - xL) / (N-1);
-  bool ecrire_f = configFile.get<bool>("ecrire_f"); // Exporter f(x,t) ou non
- // Eq.(1) ou Eq.(2) [ou Eq.(6) (faculattif)]: Eq1, Eq2 ou Eq6
-  string equation_type = configFile.get<string>("equation_type");
   
 
   for(int i(0); i<N; ++i){ 
@@ -166,8 +158,6 @@ int main(int argc, char* argv[])
     CFL = dt/dx * sqrt(*max_vel2);
   }
 
-  // Fichiers de sortie :
-  string output = configFile.get<string>("output");
 
   ofstream fichier_x((output + "_x").c_str());
   fichier_x.precision(15);

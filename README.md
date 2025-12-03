@@ -4,4 +4,4 @@ The goal of this small project is to port these scripts in GPU (CPU version only
 
 The original cpu-only files were not relying on CUDA libreries but these files do even in the cpu only version and still need a GPU for running even in the cpu-only version (that exists with some flag only as a benchmark for the gpu version).
 
-The files are nootebok (.ipynb) that can be open and run on colab.
+The new GPU compatible codes are nootebok (.ipynb) that can be open and run on colab.
